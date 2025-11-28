@@ -45,18 +45,5 @@ All profiles (yours + samples) may optionally be normalized to sum to 100%.
 
 ---
 
-## 📁 Project Structure
-
-harappa-app/
-├── app.py
-├── my_profile.txt
-├── README.md
-├── requirements.txt
-│
-├── data/
-│   └── harappaworld_samples.csv
-│
-└── scripts/
-    └── harappa_samples.py
 
 
