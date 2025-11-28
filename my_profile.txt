@@ -1,11 +1,11 @@
-S-Indian: 32.60
-Baloch: 38.95
-Caucasian: 14.48
-NE-Euro: 10.86
-SE-Asian: 0.42
-Siberian: 0.42
-Papuan: 0.23
-American: 0.89
-Beringian: 0.71
-SW-Asian: 0.27
-Pygmy: 0.18
+S-Indian: 
+Baloch:
+Caucasian:
+NE-Euro: 
+SE-Asian:
+Siberian: 
+Papuan: 
+American: 
+Beringian: 
+SW-Asian: 
+Pygmy: 
