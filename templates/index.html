@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HarappaWorld Distance Explorer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <h1>HarappaWorld Distance Explorer</h1>
+      <p>Enter your HarappaWorld components and see the closest individual samples.</p>
+    </header>
+
+    <main class="main">
+      <section class="card">
+        <h2>Your Profile</h2>
+        <form method="post" class="form-grid">
+          <div class="components-grid">
+            {% for c in components %}
+              <label class="field">
+                <span class="field-label">{{ c }}</span>
+                <input
+                  type="number"
+                  step="0.01"
+                  name="{{ c }}"
+                  value="{{ profile_vals[c] }}"
+                  placeholder="0"
+                >
+              </label>
+            {% endfor %}
+          </div>
+
+          <div class="options-row">
+            <label class="field">
+              <span class="field-label">Filter labels containing</span>
+              <input
+                type="text"
+                name="contains"
+                value="{{ filter_contains }}"
+                placeholder="e.g. Punjabi, Kalash, HGDP..."
+              >
+            </label>
+
+            <label class="field">
+              <span class="field-label">Top N</span>
+              <input type="number" name="top" min="1" max="200" value="{{ top_n }}">
+            </label>
+
+            <div class="field submit-field">
+              <button type="submit">Compute distances</button>
+            </div>
+          </div>
+        </form>
+
+        {% if normalized_profile %}
+          <div class="normalized">
+            <h3>Normalized profile (sums to 100%)</h3>
+            <div class="normalized-grid">
+              {% for c in components %}
+                <div class="chip">
+                  <span class="chip-label">{{ c }}</span>
+                  <span class="chip-value">
+                    {{ "%.2f"|format(normalized_profile[c]) }}%
+                  </span>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </section>
+
+      {% if results %}
+        <section class="card">
+          <div class="results-header">
+            <h2>Closest individual samples</h2>
+            <p>
+              Showing top {{ results|length }}
+              {% if filter_contains %}
+                matching "<strong>{{ filter_contains }}</strong>"
+              {% endif %}
+              by Euclidean distance.
+            </p>
+          </div>
+
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Sample label</th>
+                <th>Distance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in results %}
+                <tr>
+                  <td>{{ row.rank }}</td>
+                  <td>{{ row.label }}</td>
+                  <td>{{ "%.4f"|format(row.distance) }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </section>
+      {% endif %}
+    </main>
+
+    <footer class="footer">
+      <p>Built for exploring HarappaWorld individual samples in your venv project.</p>
+    </footer>
+  </div>
+</body>
+</html>
+
