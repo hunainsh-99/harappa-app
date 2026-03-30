@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Harappa World Distance Calculator
 
 A complete tool for calculating Euclidean genetic distances between a user's HarappaWorld profile and 1,985 individual HarappaWorld samples collected across South and Central Asia.
